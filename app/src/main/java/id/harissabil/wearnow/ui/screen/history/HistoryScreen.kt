@@ -65,7 +65,7 @@ fun HistoryScreen(
     modifier: Modifier = Modifier,
     onGoToResult: (String) -> Unit,
     onBack: () -> Unit,
-    viewModel: HistoryViewModel = viewModel()
+    viewModel: HistoryViewModel = viewModel(),
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
     var showFilterMenu by remember { mutableStateOf(false) }
@@ -141,12 +141,14 @@ fun HistoryScreen(
                 uiState.isLoading -> {
                     LoadingState()
                 }
+
                 uiState.errorMessage != null -> {
                     ErrorState(
                         message = uiState.errorMessage ?: "Unknown error",
                         onRetry = { viewModel.loadHistory() }
                     )
                 }
+
                 else -> {
                     val filteredItems = if (uiState.filterStatus != null) {
                         uiState.historyItems.filter { it.history.status == uiState.filterStatus }
@@ -193,7 +195,7 @@ private fun LoadingState() {
 @Composable
 private fun ErrorState(
     message: String,
-    onRetry: () -> Unit
+    onRetry: () -> Unit,
 ) {
     Box(
         modifier = Modifier.fillMaxSize(),
@@ -262,7 +264,7 @@ private fun EmptyState(filterStatus: TryOnHistoryStatus?) {
 @Composable
 private fun HistoryList(
     items: List<HistoryItemUiState>,
-    onItemClick: (String) -> Unit
+    onItemClick: (String) -> Unit,
 ) {
     LazyColumn(
         modifier = Modifier.fillMaxSize(),
@@ -281,7 +283,7 @@ private fun HistoryList(
 @Composable
 private fun HistoryCard(
     item: HistoryItemUiState,
-    onClick: () -> Unit
+    onClick: () -> Unit,
 ) {
     Card(
         modifier = Modifier
@@ -334,7 +336,8 @@ private fun HistoryCard(
 
                 // Additional info
                 if (item.history.status == TryOnHistoryStatus.FAILED &&
-                    !item.history.errorMessage.isNullOrEmpty()) {
+                    !item.history.errorMessage.isNullOrEmpty()
+                ) {
                     Text(
                         item.history.errorMessage,
                         style = MaterialTheme.typography.bodySmall,
@@ -380,8 +383,9 @@ private fun ThumbnailImage(item: HistoryItemUiState) {
     ) {
         when {
             item.isLoadingImage -> {
-                CircularProgressIndicator(modifier = Modifier.size(32.dp))
+                CircularProgressIndicator(modifier = Modifier.size(16.dp))
             }
+
             item.resultImageUri != null -> {
                 SubcomposeAsyncImage(
                     model = item.resultImageUri,
@@ -400,6 +404,7 @@ private fun ThumbnailImage(item: HistoryItemUiState) {
                     }
                 )
             }
+
             item.history.status == TryOnHistoryStatus.PROCESSING -> {
                 // Processing placeholder
                 Box(
@@ -421,6 +426,7 @@ private fun ThumbnailImage(item: HistoryItemUiState) {
                     )
                 }
             }
+
             item.history.status == TryOnHistoryStatus.FAILED -> {
                 // Failed placeholder
                 Icon(
@@ -430,6 +436,7 @@ private fun ThumbnailImage(item: HistoryItemUiState) {
                     tint = MaterialTheme.colorScheme.error
                 )
             }
+
             else -> {
                 // Default placeholder
                 Text(
@@ -449,16 +456,19 @@ private fun StatusChip(status: TryOnHistoryStatus?) {
             Icons.Default.CheckCircle,
             "Completed"
         )
+
         TryOnHistoryStatus.PROCESSING -> Triple(
             MaterialTheme.colorScheme.secondaryContainer,
             null,
             "Processing"
         )
+
         TryOnHistoryStatus.FAILED -> Triple(
             MaterialTheme.colorScheme.errorContainer,
             Icons.Default.Error,
             "Failed"
         )
+
         else -> Triple(
             MaterialTheme.colorScheme.surfaceVariant,
             null,
