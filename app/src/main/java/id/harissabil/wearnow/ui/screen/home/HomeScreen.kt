@@ -236,14 +236,6 @@ fun HomeScreen(
                 )
             }
 
-            // Try-on options preview
-            TryOnOptionsPreview(
-                selectedGarmentClass = uiState.selectedGarmentClass,
-                selectedMergeStyle = uiState.selectedMergeStyle,
-                onOptionsClick = { viewModel.showOptionsDialog() },
-                modifier = Modifier.padding(horizontal = 16.dp)
-            )
-
             // Action buttons
             ActionButtons(
                 hasGarmentImage = uiState.capturedGarmentUri != null || uiState.selectedGarmentUri != null,
@@ -270,6 +262,14 @@ fun HomeScreen(
                         }
                     }
                 },
+                modifier = Modifier.padding(horizontal = 16.dp)
+            )
+
+            // Try-on options preview
+            TryOnOptionsPreview(
+                selectedGarmentClass = uiState.selectedGarmentClass,
+                selectedMergeStyle = uiState.selectedMergeStyle,
+                onOptionsClick = { viewModel.showOptionsDialog() },
                 modifier = Modifier.padding(horizontal = 16.dp)
             )
 

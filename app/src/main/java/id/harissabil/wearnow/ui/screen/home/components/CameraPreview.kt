@@ -121,7 +121,7 @@ fun CameraPreview(
     Card(
         modifier = modifier
             .fillMaxWidth()
-            .height(400.dp),
+            .height(540.dp), // Increased from 400dp to 480dp
         shape = RoundedCornerShape(16.dp),
         colors = CardDefaults.cardColors(
             containerColor = MaterialTheme.colorScheme.surface
@@ -326,4 +326,3 @@ fun CameraPreview(
         }
     }
 }
-
