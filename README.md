@@ -31,7 +31,7 @@ The backend stack includes:
 
 ## Backend Repository
 
-The source code for the AWS Amplify backend is maintained in a separate repository. You can find it [here](https://github.com/harissabil/wearnow-backend):
+The source code for the AWS Amplify backend is maintained in a separate repository. You can find it [here](https://github.com/harissabil/wearnow-backend)
 
 ## Getting Started
 
