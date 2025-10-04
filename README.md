@@ -1,6 +1,6 @@
 # WearNOW Android
 
-![wearnow-screenshot](/assets/wearnow-screenshot.png)
+![wearnow-screenshot](/assets/wearnow-screenshot.png?raw=true)
 
 This is the repository for the WearNOW Android application.
 
@@ -15,7 +15,7 @@ WearNOW allows users to virtually try on clothing using their own photos. It lev
 
 ## Architecture and Technology
 
-![wearnow-architecture](/assets/wearnow-architecture.png)
+![wearnow-architecture](/assets/wearnow-architecture.png?raw=true)
 
 The WearNOW Android application connects to a serverless backend built on AWS and managed by AWS Amplify. The frontend is a native Android application (Java/Kotlin).
 
